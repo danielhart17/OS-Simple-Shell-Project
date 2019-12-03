@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 #define MAX_COMMAND_LINE_LEN 1024
 #define MAX_COMMAND_LINE_ARGS 128
@@ -42,7 +43,7 @@ int main() {
         // 1. Tokenize the command line input (split it on whitespace)
         // 2. Create a child process which will execute the command line input
         // 3. The parent process should wait for the child to complete
-
+        //
         // Hints (put these into Google):
         // man fork
         // man execve
@@ -57,10 +58,11 @@ int main() {
         while (arg != NULL){
           arguments[i] = arg;
           i+=1;
+
           arg = strtok(NULL,delimiters);
         }
 
-        pid = fork();
+        pid_t pid = fork();
 
         if (pid < 0){
           perror("Fork error!\n");  // If fork() fails it does not create a child and returns -1.
