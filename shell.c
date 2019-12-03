@@ -65,12 +65,12 @@ int main() {
         pid_t pid = fork();
 
         if (pid < 0){
-          perror("Fork error!\n");  // If fork() fails it does not create a child and returns -1.
+          perror("Fork error!\n");
           exit(1);
         } else if (pid == 0) {
           printf("This is the Child process!\n");
           if (execve(cmd, arguments, environ) < 0) {
-            perror("Execution error!\n");   // Input is not executable.
+            perror("Execution error!\n");
             exit(1);
           }
           exit(0);
