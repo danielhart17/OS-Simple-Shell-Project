@@ -42,12 +42,41 @@ int main() {
         // 1. Tokenize the command line input (split it on whitespace)
         // 2. Create a child process which will execute the command line input
         // 3. The parent process should wait for the child to complete
-        //
+
         // Hints (put these into Google):
         // man fork
         // man execve
         // man wait
         // man strtok
+
+        char *cmd;
+        char *arg;
+        int i = 0;
+        cmd = strtok(command_line,delimiters);
+        arg = strtok(NULL,delimiters);
+        while (arg != NULL){
+          arguments[i] = arg;
+          i+=1;
+          arg = strtok(NULL,delimiters);
+        }
+
+        pid = fork();
+
+        if (pid < 0){
+          perror("Fork error!\n");  // If fork() fails it does not create a child and returns -1.
+          exit(1);
+        } else if (pid == 0) {
+          printf("This is the Child process!\n");
+          if (execve(cmd, arguments, environ) < 0) {
+            perror("Execution error!\n");   // Input is not executable.
+            exit(1);
+          }
+          exit(0);
+        } else {
+          printf("This is the Parent process!\n");
+          wait(NULL);
+          printf("Child has terminated.\n");
+        }
     }
 
     // This should never be reached.
