@@ -1,5 +1,5 @@
 Your job is to implement a very basic shell. It should accept input from the command line,
-parse it, and run the executable specified. More specfic steps are provided in the shell.c file.
+parse it, and run the executable specified. More specific steps are provided in the shell.c file.
 
 This will also provide practice with reading manual pages (or man pages for short). These are
 extremely useful for understanding these system calls at a deeper level. For instance,
