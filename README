@@ -9,6 +9,6 @@ function return?
 hello.c - Simple C program that contains the source code for the hello executable.
 hello - executable that you should be able to run in your shell.
 Makefile - Makefile for the shell and hello executable. Run `make shell` and `make hello` respectively.
-shell - executable of the solution, for your reference. You can run `./shell` in the terminal
+ref_shell - executable of the solution, for your reference. You can run `./ref_shell` in the terminal
             to see what your shell should be doing.
 shell.c - where you implement your shell!
