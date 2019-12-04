@@ -7,7 +7,7 @@
 #define MAX_COMMAND_LINE_LEN 1024
 #define MAX_COMMAND_LINE_ARGS 128
 
-char prompt[] = "shell > ";
+char prompt[] = "ref_shell >> ";
 char delimiters[] = " \t\r\n";
 char **environ;
 
@@ -50,25 +50,27 @@ int main() {
         // man wait
         // man strtok
 
-        char *cmd;
-        char *arg;
+
+        char *cmd, *arg;    //define variables
         int i = 0;
-        cmd = strtok(command_line,delimiters);
+        cmd = strtok(command_line,delimiters);    //initialize variables
         arg = strtok(NULL,delimiters);
         while (arg != NULL){
-          arguments[i] = arg;
+          arguments[i] = arg;    // populate array with arg values
           i+=1;
-
           arg = strtok(NULL,delimiters);
         }
 
-        pid_t pid = fork();
+        pid_t pid = fork();    //assign pid by calling a fork()
 
+        //error handling
         if (pid < 0){
           perror("Fork error!\n");
           exit(1);
         } else if (pid == 0) {
           printf("This is the Child process!\n");
+
+          //if file or directory is not found, throw execution error
           if (execve(cmd, arguments, environ) < 0) {
             perror("Execution error!\n");
             exit(1);
@@ -77,7 +79,7 @@ int main() {
         } else {
           printf("This is the Parent process!\n");
           wait(NULL);
-          printf("Child has terminated.\n");
+          printf("The child process has terminated.\n");
         }
     }
 
